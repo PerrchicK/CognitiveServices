@@ -485,7 +485,7 @@ def addFaceToPerson(filename, personId, personGroupId): # https://westus.dev.cog
         print('Error:')
         print(e)
 
-def analyze(filename):
+def analyze(filepath): # https://docs.microsoft.com/en-us/azure/cognitive-services/Computer-vision/quickstarts/python-analyze
     # Request parameters 
     # The detection options for MCS Face API check MCS face api 
     # documentation for complete list of features available for 
@@ -495,21 +495,28 @@ def analyze(filename):
         'visualFeatures': 'Categories,Description,Color'
     }
 
-    # Request headers
-    # for locally stored image files use
-    # 'Content-Type': 'application/octet-stream'
-    headers = {
-        'Content-Type': 'application/octet-stream',
-        'Ocp-Apim-Subscription-Key': vision_subscription_key,
-    }
-
     # route to the face api
     path_to_vision_api = '/vision/v2.0/analyze'
     # open jpg file as binary file data for intake by the MCS api
 
-    with open(filename, 'rb') as f:
-        print(f)
-        img_data = f.read()
+    is_url = filepath.startswith('http')
+    # Request headers
+    headers = {}
+    # print(is_url)
+    if is_url:
+        headers = {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key': vision_subscription_key,
+        }
+    else:
+        headers = {
+            'Content-Type': 'application/octet-stream',
+            'Ocp-Apim-Subscription-Key': vision_subscription_key,
+        }
+        with open(filepath, 'rb') as f:
+            print(f)
+            img_data = f.read()
+
     try:
         # Execute the api call as a POST request. 
         # What's happening?: You're sending the data, headers and
@@ -517,12 +524,19 @@ def analyze(filename):
         # mcs server's response to a variable.
         # Note: mcs face api only returns 1 analysis at time
 
-        response = requests.post(uri_base + path_to_vision_api,
-                                data=img_data, 
-                                headers=headers,
-                                params=params)
-        
-        print ('Response:')
+        url = uri_base + path_to_vision_api
+        if is_url:
+            response = requests.post(url,
+                        json={"url":filepath}, 
+                        headers=headers,
+                        params=params)
+        else:
+            response = requests.post(url,
+                                    data=img_data, 
+                                    headers=headers,
+                                    params=params)
+
+        print ('Response (for ' + url + '):')
         # The 'analysis' object contains various fields that describe the image. The most
         # relevant caption for the image is obtained from the 'descriptions' property.
         analysis = response.json()
@@ -532,13 +546,14 @@ def analyze(filename):
         # Display the image and overlay it with the caption.
         # If you are using a Jupyter notebook, uncomment the following line.
         #%matplotlib inline
-        from PIL import Image
-        from io import BytesIO
-        import matplotlib.pyplot as plt
-        image = Image.open(BytesIO(img_data))
-        plt.imshow(image)
-        plt.axis("off")
-        _ = plt.title(image_caption, size="x-large", y=-0.1)
+        if is_url == False:
+            from PIL import Image
+            from io import BytesIO
+            import matplotlib.pyplot as plt
+            image = Image.open(BytesIO(img_data))
+            plt.imshow(image)
+            plt.axis("off")
+            _ = plt.title(image_caption, size="x-large", y=-0.1)
 
     except Exception as e:
         print('Error:')
@@ -682,9 +697,13 @@ def getRectangle(faceDictionary):
 # detect('The_Avengers_Assembled.jpg')
 # identify()
 
-# analyze('/Users/pshalev/Downloads/The_Avengers_Assembled.jpg')
-# analyze('liga-justicia.jpg')
+urls = ['https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg', 'https://cdn.mos.cms.futurecdn.net/JQsTuGusR22dhxNcwS9ePC-1200-80.jpg']
+
+for url in urls:
+    analyze(url)
+
 # analyze('AvengersCast.jpg')
+# analyze('liga-justicia.jpg')
 
 # addFaceList("meetup_sample_list" ,"meetup_sample_list", "The data used in the meetup.")
 # getFaceLists('meetup_sample_list')  # {faceListId} in case you want to get a specific list
