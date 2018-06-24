@@ -30,7 +30,9 @@ class NotHotDogViewController: CSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        btnPickImage.imageView?.contentMode = .scaleAspectFit
+
         imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         
