@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC6E150C20D7917000BB3E21 /* NotHotDogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150B20D7917000BB3E21 /* NotHotDogViewController.swift */; };
+		AC6E150C20D7917000BB3E21 /* ImageOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */; };
 		AC6E150E20D792BA00BB3E21 /* CSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150D20D792BA00BB3E21 /* CSViewController.swift */; };
 		AC6E151020D7935000BB3E21 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150F20D7935000BB3E21 /* Utilities.swift */; };
 		AC6E151220D796D500BB3E21 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E151120D796D500BB3E21 /* ServicesViewController.swift */; };
@@ -32,11 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AC6E150B20D7917000BB3E21 /* NotHotDogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotHotDogViewController.swift; sourceTree = "<group>"; };
+		AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperationsViewController.swift; sourceTree = "<group>"; };
 		AC6E150D20D792BA00BB3E21 /* CSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSViewController.swift; sourceTree = "<group>"; };
 		AC6E150F20D7935000BB3E21 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AC6E151120D796D500BB3E21 /* ServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
-		AC8C75B920D457BA00556E2E /* CognitiveServices.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CognitiveServices.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC8C75B920D457BA00556E2E /* Cognitive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cognitive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8C75BC20D457BA00556E2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8C75BE20D457BA00556E2E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AC8C75C120D457BA00556E2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		AC8C75BA20D457BA00556E2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC8C75B920D457BA00556E2E /* CognitiveServices.app */,
+				AC8C75B920D457BA00556E2E /* Cognitive.app */,
 				AC8C75CD20D457BA00556E2E /* CognitiveServicesTests.xctest */,
 				ACF1BDF420D7EBCE0007699F /* CognitiveServicesTests.xctest */,
 			);
@@ -105,7 +105,7 @@
 				AC6E150D20D792BA00BB3E21 /* CSViewController.swift */,
 				AC8C75BC20D457BA00556E2E /* AppDelegate.swift */,
 				AC8C75BE20D457BA00556E2E /* SplashViewController.swift */,
-				AC6E150B20D7917000BB3E21 /* NotHotDogViewController.swift */,
+				AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */,
 				AC8C75C020D457BA00556E2E /* Main.storyboard */,
 				AC8C75C320D457BA00556E2E /* Assets.xcassets */,
 				AC8C75C520D457BA00556E2E /* LaunchScreen.storyboard */,
@@ -150,7 +150,7 @@
 			);
 			name = CognitiveServices;
 			productName = "Hotdog Recognizer";
-			productReference = AC8C75B920D457BA00556E2E /* CognitiveServices.app */;
+			productReference = AC8C75B920D457BA00556E2E /* Cognitive.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AC8C75CC20D457BA00556E2E /* CognitiveServicesTests */ = {
@@ -270,7 +270,7 @@
 				AC6E151220D796D500BB3E21 /* ServicesViewController.swift in Sources */,
 				AC8C75BF20D457BA00556E2E /* SplashViewController.swift in Sources */,
 				AC8C75BD20D457BA00556E2E /* AppDelegate.swift in Sources */,
-				AC6E150C20D7917000BB3E21 /* NotHotDogViewController.swift in Sources */,
+				AC6E150C20D7917000BB3E21 /* ImageOperationsViewController.swift in Sources */,
 				AC6E151020D7935000BB3E21 /* Utilities.swift in Sources */,
 				AC6E150E20D792BA00BB3E21 /* CSViewController.swift in Sources */,
 			);
@@ -439,7 +439,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.perrchick.CognitiveServices;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Cognitive;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -455,7 +455,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.perrchick.CognitiveServices;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Cognitive;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

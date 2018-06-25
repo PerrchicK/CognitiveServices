@@ -9,9 +9,29 @@
 import UIKit
 import MobileCoreServices
 
-class NotHotDogViewController: CSViewController {
+class ImageOperationsViewController: CSViewController {
     @IBOutlet weak var btnPickImage: UIButton!
-    var imagePickerController: UIImagePickerController!
+    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var txtResponseBody: UITextView!
+    @IBOutlet weak var lblResponseTitle: UILabel!
+    @IBOutlet weak var imgPickedImage: UIImageView!
+
+    lazy var imagePickerController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        
+        guard isCameraAvailable else {
+            print("This device has bo camera 😱")
+            lblMissingCameraIndicator.isPresented = true
+            btnPickImage.isEnabled = false
+            return imagePickerController
+        }
+        
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
+        imagePickerController.mediaTypes = [kUTTypeImage.asString]
+
+        return imagePickerController
+    }()
     
     lazy var lblMissingCameraIndicator: UILabel = {
         let missingCameraIndicatorLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
@@ -28,25 +48,6 @@ class NotHotDogViewController: CSViewController {
         return missingCameraIndicatorLabel
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        btnPickImage.imageView?.contentMode = .scaleAspectFit
-
-        imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        
-        guard isCameraAvailable else {
-            print("This device has bo camera 😱")
-            lblMissingCameraIndicator.isPresented = true
-            btnPickImage.isEnabled = false
-            return
-        }
-        
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
-        imagePickerController.mediaTypes = [kUTTypeImage.asString]
-    }
-    
     @IBAction func onPickImageButtonClicked(_ sender: UIButton) {
         guard isCameraAvailable else { return }
         present(imagePickerController, animated: true, completion: nil)
@@ -55,10 +56,9 @@ class NotHotDogViewController: CSViewController {
     var isCameraAvailable: Bool {
         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
     }
-    
 }
 
-extension NotHotDogViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ImageOperationsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let mediaUrl = info[UIImagePickerControllerReferenceURL].debugDescription
@@ -69,7 +69,7 @@ extension NotHotDogViewController: UIImagePickerControllerDelegate, UINavigation
         }
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            btnPickImage.setImage(image, for: .normal)
+            imgPickedImage.image = image
         }
         
         picker.dismiss(animated: true, completion: nil)

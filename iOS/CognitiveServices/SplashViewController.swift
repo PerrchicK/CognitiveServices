@@ -12,10 +12,10 @@ class SplashViewController: CSViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        let seconds: Double = 2
+        let seconds: Double = 0.5
         let delayTime = DispatchTime.now() + Double(Int64(seconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: delayTime, execute: { [unowned self] in
-            let vc = NotHotDogViewController.instantiate()
+            let vc = ImageOperationsViewController.instantiate()
             vc.modalTransitionStyle = .crossDissolve
             let navigationController = UINavigationController(rootViewController: vc)
             navigationController.isNavigationBarHidden = true
