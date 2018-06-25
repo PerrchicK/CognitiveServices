@@ -2,6 +2,8 @@
 import urllib
 import json
 import requests
+import concurrent.futures
+
 from io import BytesIO
 from PIL import Image, ImageDraw
 # Replace 'KEY_x' with your subscription key as a string
@@ -485,14 +487,30 @@ def addFaceToPerson(filename, personId, personGroupId): # https://westus.dev.cog
         print('Error:')
         print(e)
 
+def analyzeBatch(urls):
+    # for url in urls: 
+    #     analyze(url)
+
+    success_responses_counter = 0
+    error_responses_counter = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+        future_to_url = {executor.submit(analyze, url): url for url in urls}
+        for future in concurrent.futures.as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                data = future.result()
+            except Exception as exc:
+                print(exc)
+                error_responses_counter = error_responses_counter + 1
+            else:
+                success_responses_counter = success_responses_counter + 1
+    print("done analyzing " + str(len(urls)) + " urls")
+    print("success_responses_counter = " + str(success_responses_counter))
+    print("error_responses_counter = " + str(error_responses_counter))
+
 def analyze(filepath): # https://docs.microsoft.com/en-us/azure/cognitive-services/Computer-vision/quickstarts/python-analyze
-    # Request parameters 
-    # The detection options for MCS Face API check MCS face api 
-    # documentation for complete list of features available for 
-    # detection in an image
-    # these parameters tell the api I want to detect a face and a smile
     params = {
-        'visualFeatures': 'Categories,Description,Color'
+        'visualFeatures': 'Categories,Description,Color,ImageType,Faces'
     }
 
     # route to the face api
@@ -527,12 +545,12 @@ def analyze(filepath): # https://docs.microsoft.com/en-us/azure/cognitive-servic
         url = uri_base + path_to_vision_api
         if is_url:
             response = requests.post(url,
-                        json={"url":filepath}, 
+                        json={"url": filepath},
                         headers=headers,
                         params=params)
         else:
             response = requests.post(url,
-                                    data=img_data, 
+                                    data=img_data,
                                     headers=headers,
                                     params=params)
 
@@ -697,10 +715,9 @@ def getRectangle(faceDictionary):
 # detect('The_Avengers_Assembled.jpg')
 # identify()
 
-urls = ['https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg', 'https://cdn.mos.cms.futurecdn.net/JQsTuGusR22dhxNcwS9ePC-1200-80.jpg']
+# analyzeBatch(['https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg', 'https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg', 'https://cdn.mos.cms.futurecdn.net/JQsTuGusR22dhxNcwS9ePC-1200-80.jpg', 'https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg'])
 
-for url in urls:
-    analyze(url)
+# analyze("https://image.shutterstock.com/image-photo/kiev-ukraine-march-31-2015-260nw-275940803.jpg")
 
 # analyze('AvengersCast.jpg')
 # analyze('liga-justicia.jpg')
