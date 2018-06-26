@@ -558,8 +558,9 @@ def analyze(filepath): # https://docs.microsoft.com/en-us/azure/cognitive-servic
         # The 'analysis' object contains various fields that describe the image. The most
         # relevant caption for the image is obtained from the 'descriptions' property.
         analysis = response.json()
-        image_caption = "temp" #analysis["description"]["captions"][0]["text"].capitalize()
+        image_caption = analysis["description"]["captions"][0]["text"].capitalize()
         print (analysis)
+        # print (image_caption)
 
         # Display the image and overlay it with the caption.
         # If you are using a Jupyter notebook, uncomment the following line.
@@ -703,6 +704,52 @@ def identify(faceIds): # https://westus.dev.cognitive.microsoft.com/docs/service
         print('Error:')
         print(e)
 
+def findSimilars(faceIds): # https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239
+    # Request parameters 
+    # The detection options for MCS Face API check MCS face api 
+    # documentation for complete list of features available for 
+    # detection in an image
+    # these parameters tell the api I want to detect a face and a smile
+    params = {
+        "faceListId": "meetup_persons_list",
+        "faceIds": faceIds,
+        "maxNumOfCandidatesReturned": 1,
+        "mode": "matchPerson"
+    }
+
+    # route to the face api
+    path_to_face_api = '/face/v1.0/findsimilars'
+
+    # Request headers
+    # for locally stored image files use
+    headers = {
+        'Content-Type': 'application/json',
+        'Ocp-Apim-Subscription-Key': face_subscription_key,
+    }
+
+    try:
+        # Execute the api call as a POST request. 
+        # What's happening?: You're sending the data, headers and
+        # parameter to the api route & saving the
+        # mcs server's response to a variable.
+        # Note: mcs face api only returns 1 analysis at time
+
+        response = requests.post(uri_base + path_to_face_api,
+                                json=params, 
+                                headers=headers)
+        
+        print ('Response:')
+        # json() is a method from the request library that converts 
+        # the json reponse to a python friendly data structure
+        parsed = response.json()
+            
+        # display the image analysis data
+        print (parsed)
+
+    except Exception as e:
+        print('Error:')
+        print(e)
+
 #Convert width height to a point in a rectangle
 def getRectangle(faceDictionary):
     rect = faceDictionary['faceRectangle']
@@ -712,7 +759,12 @@ def getRectangle(faceDictionary):
     right = top + rect['width']
     return ((left, top), (bottom, right))
 
+# detect('/Users/pshalev/Downloads/trump-twitter.jpg')
 # detect('The_Avengers_Assembled.jpg')
+# detect('/Users/pshalev/Dropbox/~ Shared - other MacBook/Pics/Me/Avatar1.jpg')
+# detect('/Users/pshalev/Dropbox/~ Shared - other MacBook/Pics/Me/Bad hair day (1).png')
+# detect('/Users/pshalev/Dropbox/~ Shared - other MacBook/Pics/Me/Bad hair day (2).png')
+# detect('/Users/pshalev/Dropbox/~ Shared - other MacBook/Pics/Me/half-marathon.jpg')
 # identify()
 
 # analyzeBatch(['https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg', 'https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg', 'https://cdn.mos.cms.futurecdn.net/JQsTuGusR22dhxNcwS9ePC-1200-80.jpg', 'https://www.themarysue.com/wp-content/uploads/2015/05/Avengers-Age-of-Ultron-Team-Poster.jpg'])
@@ -720,18 +772,34 @@ def getRectangle(faceDictionary):
 # analyze("https://image.shutterstock.com/image-photo/kiev-ukraine-march-31-2015-260nw-275940803.jpg")
 
 # analyze('AvengersCast.jpg')
+# analyze('Yoav_Toussia_Cohen.jpg')
 # analyze('liga-justicia.jpg')
+
+# addPersonGroup(person_group_id, person_group_name, optional_user_data)
+# addPersonToPersonGroup(person_group_id, person_name, optional_user_data)
+# addFaceToPerson(image_fila_local_path, person_id, person_group_id)
+# addFaceToPerson("training/GameChanger.png", "d50a4f57-6c30-4c38-8bc8-b4368e41255d", "meetup_persons_list")
+# train("meetup_persons_list")
+# checkTrainingStatus("meetup_persons_list")
+
+# verifyPerson(temporary_face_id_from_detect_api, trained_person_group_id, person_id)
+# verifyPerson('619bc094-a5a6-499f-b6a5-10a0f8963afc', 'meetup_persons_list', 'd50a4f57-6c30-4c38-8bc8-b4368e41255d')
+# verifyPerson('761373a9-c131-4866-b881-3da33aea6cc4', 'meetup_persons_list', 'd50a4f57-6c30-4c38-8bc8-b4368e41255d')
+# verifyPerson('4293f9f6-fde0-4b19-b9e4-271ed018f104', 'meetup_persons_list', 'd50a4f57-6c30-4c38-8bc8-b4368e41255d')
+# verifyPerson('5bfcdecb-6ef9-4f31-bcbe-eef76cfee834', 'meetup_persons_list', 'd50a4f57-6c30-4c38-8bc8-b4368e41255d')
+
+# identify(['8311ce49-4d93-4f48-ad9d-52a1d391e963'])
+# identify(['bae7af26-061c-4715-8eab-bbf045a6fdb0', '7223364e-1d14-4ee1-ad7a-d6b201274d2b'])
+
+# findSimilars(['3e4801d5-636a-45b1-8f69-d60103059811'])
+
+
+
+
+
+
 
 # addFaceList("meetup_sample_list" ,"meetup_sample_list", "The data used in the meetup.")
 # getFaceLists('meetup_sample_list')  # {faceListId} in case you want to get a specific list
 # addFace('/Users/pshalev/Downloads/trump-twitter.jpg', "meetup_sample_list") # {'persistedFaceId': '5d6d6dd6-fa98-4872-bf07-d95c1bf8b58e'}
 # getPersonGroups() # getPersonGroups("meetup_persons_list")
-
-# verifyPerson(temporary_face_id_from_detect_api, trained_person_group_id, person_id)
-# addPersonGroup(person_group_id, person_group_name, optional_user_data)
-# addPersonToPersonGroup(person_group_id, person_name, optional_user_data)
-# addFaceToPerson(image_fila_local_path, person_id, person_group_id)
-# train(person_group_id)
-# checkTrainingStatus(person_group_id)
-
-# identify(['8311ce49-4d93-4f48-ad9d-52a1d391e963'])
