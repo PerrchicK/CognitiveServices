@@ -8,13 +8,23 @@
 
 import UIKit
 import MobileCoreServices
+import OnGestureSwift
 
 class ImageOperationsViewController: CSViewController {
+    
+    class Constants {
+        static let PersonId_Perry = "d50a4f57-6c30-4c38-8bc8-b4368e41255d"
+        static let PersonId_Nikolai = "6b2e3cdf-a5b7-456f-baf6-c104773955b4"
+        static let PersonsGroupId = "meetup_persons_list"
+    }
+
     @IBOutlet weak var btnPickImage: UIButton!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var txtResponseBody: UITextView!
     @IBOutlet weak var lblResponseTitle: UILabel!
     @IBOutlet weak var imgPickedImage: UIImageView!
+
+    var lastDetectedFaceId: String?
 
     lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
@@ -47,20 +57,79 @@ class ImageOperationsViewController: CSViewController {
 
         return missingCameraIndicatorLabel
     }()
-    
-    @IBAction func onPickImageButtonClicked(_ sender: UIButton) {
-        guard isCameraAvailable else { return }
-        present(imagePickerController, animated: true, completion: nil)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        imgPickedImage.onClick { [unowned self] _ in
+            self.pickImage()
+        }
+
+        btnPickImage.onClick { [unowned self] _ in
+            self.pickImage()
+        }
     }
-    
+
+    func pickImage() {
+        guard isCameraAvailable else { return }
+
+        UIAlertController.makeActionSheet(title: "Camera", message: nil)
+            .withAction(UIAlertAction(title: "Oops...", style: UIAlertActionStyle.cancel, handler: nil))
+            .withAction(UIAlertAction(title: "Capture Face", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                self.present(self.imagePickerController, animated: true, completion: nil)
+            })).show()
+    }
+
     var isCameraAvailable: Bool {
         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+    }
+    
+    func onImagePicked(image: UIImage) {
+        imgPickedImage.image = image
+
+        guard let imageData = UIImageJPEGRepresentation(image, 0.7) else { return }
+        self.faceServiceClient.detect(with: imageData, returnFaceId: true, returnFaceLandmarks: true, returnFaceAttributes: nil) { [weak self] (faces, error) in
+            if let error = error {
+                print("Cognitive detection error: \(error)")
+            } else {
+                guard let faceId = faces?.last?.faceId else { return }
+                self?.lastDetectedFaceId = faceId
+                self?.lblStatus.text = "Done"
+                self?.txtResponseBody.text = "Detection results: last face ID = \(faceId)"
+            }
+        }
+    }
+
+    @IBAction func onPerformActionClicked(_ sender: UIButton) {
+        guard imgPickedImage.image != nil else { return }
+
+        UIAlertController.makeActionSheet(title: "Choose action", message: "pick one")
+            .withAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            .withAction(UIAlertAction(title: "Verify", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let faceId = self.lastDetectedFaceId else { return }
+                self.faceServiceClient.verify(withFaceId: faceId, personId: Constants.PersonId_Nikolai, personGroupId: Constants.PersonsGroupId, completionBlock: { [weak self] (verificationResult, error) in
+                    if let error = error { print("Failed! Error: \(error)"); return }
+                    guard let verificationResult = verificationResult, let confidence = verificationResult.confidence else { print("Failed to extract result!"); return }
+                    
+                    self?.txtResponseBody.text = "Verification results: is identical = \(verificationResult.isIdentical), confidence = \(confidence)"
+                    self?.lblStatus.text = "Done"
+                })
+            }))
+            .withAction(UIAlertAction(title: "Add person group", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let faceId = self.lastDetectedFaceId else { return }
+            }))
+            .withAction(UIAlertAction(title: "Add person", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let faceId = self.lastDetectedFaceId else { return }
+            }))
+            .withAction(UIAlertAction(title: "Train", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let faceId = self.lastDetectedFaceId else { return }
+            }))
+        .show()
     }
 }
 
 extension ImageOperationsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
         let mediaUrl = info[UIImagePickerControllerReferenceURL].debugDescription
         print("picked image, location on disk: \(mediaUrl)")
         
@@ -69,10 +138,9 @@ extension ImageOperationsViewController: UIImagePickerControllerDelegate, UINavi
         }
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imgPickedImage.image = image
+            onImagePicked(image: image)
         }
         
         picker.dismiss(animated: true, completion: nil)
     }
 }
-

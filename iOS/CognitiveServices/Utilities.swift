@@ -35,6 +35,66 @@ extension UIViewController {
     }
 }
 
+extension UIAlertController {
+    
+    /**
+     Dismisses the current alert (if presented) and pops up the new one
+     */
+    @discardableResult
+    func show(completion: (() -> Swift.Void)? = nil) -> UIAlertController? {
+        guard let mostTopViewController = UIApplication.mostTopViewController() else { print("Failed to present alert [title: \(String(describing: self.title)), message: \(String(describing: self.message))]"); return nil }
+        
+        mostTopViewController.present(self, animated: true, completion: completion)
+        
+        return self
+    }
+    
+    func withAction(_ action: UIAlertAction) -> UIAlertController {
+        self.addAction(action)
+        return self
+    }
+    
+    func withInputText(configurationBlock: @escaping ((_ textField: UITextField) -> Void)) -> UIAlertController {
+        self.addTextField(configurationHandler: { (textField: UITextField!) -> () in
+            configurationBlock(textField)
+        })
+        
+        return self
+    }
+    
+    static func make(style: UIAlertControllerStyle, title: String, message: String?) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        return alertController
+    }
+    
+    static func makeActionSheet(title: String, message: String?) -> UIAlertController {
+        return make(style: .actionSheet, title: title, message: message)
+    }
+    
+    static func makeAlert(title: String, message: String) -> UIAlertController {
+        return make(style: .alert, title: title, message: message)
+    }
+    
+    /**
+     A service method that alerts with title and message in the top view controller
+     
+     - parameter title: The title of the UIAlertView
+     - parameter message: The message inside the UIAlertView
+     */
+    static func alert(title: String, message: String, dismissButtonTitle:String = "OK", onGone: (() -> Void)? = nil) {
+        UIAlertController.makeAlert(title: title, message: message).withAction(UIAlertAction(title: dismissButtonTitle, style: UIAlertActionStyle.cancel, handler: { (alertAction) -> Void in
+            onGone?()
+        })).show()
+    }
+}
+
+extension UIApplication {
+    static func mostTopViewController() -> UIViewController? {
+        guard let topController = UIApplication.shared.keyWindow?.rootViewController else { return nil }
+        return topController.mostTopViewController()
+    }
+}
+
 extension UIView {
     
     // MARK: - Helpers

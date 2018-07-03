@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BE37A5ECD0655869342BC66 /* Pods_CognitiveServicesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00689EF531E41007C78DDEE2 /* Pods_CognitiveServicesTests.framework */; };
+		900B9A4D9C3FB18BD5A70704 /* Pods_CognitiveServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F408E09F91E34E4D1D8FBCD /* Pods_CognitiveServices.framework */; };
 		AC6E150C20D7917000BB3E21 /* ImageOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */; };
 		AC6E150E20D792BA00BB3E21 /* CSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150D20D792BA00BB3E21 /* CSViewController.swift */; };
 		AC6E151020D7935000BB3E21 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150F20D7935000BB3E21 /* Utilities.swift */; };
@@ -18,7 +20,6 @@
 		AC8C75C720D457BA00556E2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8C75C520D457BA00556E2E /* LaunchScreen.storyboard */; };
 		AC8C75D220D457BA00556E2E /* CognitiveServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C75D120D457BA00556E2E /* CognitiveServicesTests.swift */; };
 		AC8C75DD20D45D9E00556E2E /* ConstantStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC8C75DC20D45D9D00556E2E /* ConstantStrings.plist */; };
-		ACF1BDF920D7EBCE0007699F /* CognitiveServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF1BDF820D7EBCE0007699F /* CognitiveServicesTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,10 +33,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00689EF531E41007C78DDEE2 /* Pods_CognitiveServicesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CognitiveServicesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		127A15751868348E3E41A693 /* Pods-CognitiveServices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitiveServices.release.xcconfig"; path = "Pods/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices.release.xcconfig"; sourceTree = "<group>"; };
+		1F408E09F91E34E4D1D8FBCD /* Pods_CognitiveServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CognitiveServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24FB049DA822FEF50609DB9D /* Pods-CognitiveServicesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitiveServicesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CognitiveServicesTests/Pods-CognitiveServicesTests.release.xcconfig"; sourceTree = "<group>"; };
+		4530FE6530C912EDE8605900 /* Pods-CognitiveServices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitiveServices.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices.debug.xcconfig"; sourceTree = "<group>"; };
 		AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperationsViewController.swift; sourceTree = "<group>"; };
 		AC6E150D20D792BA00BB3E21 /* CSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSViewController.swift; sourceTree = "<group>"; };
 		AC6E150F20D7935000BB3E21 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AC6E151120D796D500BB3E21 /* ServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
+		AC879BFA20E9383F0006E410 /* CognitiveServices-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CognitiveServices-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC8C75B920D457BA00556E2E /* Cognitive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cognitive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8C75BC20D457BA00556E2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8C75BE20D457BA00556E2E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -48,8 +55,7 @@
 		AC8C75D320D457BA00556E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC8C75DC20D45D9D00556E2E /* ConstantStrings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ConstantStrings.plist; sourceTree = "<group>"; };
 		ACF1BDF420D7EBCE0007699F /* CognitiveServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CognitiveServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ACF1BDF820D7EBCE0007699F /* CognitiveServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitiveServicesTests.swift; sourceTree = "<group>"; };
-		ACF1BDFA20D7EBCE0007699F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9483E4A18CEA5CAD426F8C7 /* Pods-CognitiveServicesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitiveServicesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CognitiveServicesTests/Pods-CognitiveServicesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				900B9A4D9C3FB18BD5A70704 /* Pods_CognitiveServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BE37A5ECD0655869342BC66 /* Pods_CognitiveServicesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,13 +85,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F644C5CB505E1BD915A59B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F408E09F91E34E4D1D8FBCD /* Pods_CognitiveServices.framework */,
+				00689EF531E41007C78DDEE2 /* Pods_CognitiveServicesTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AC8C75B020D457BA00556E2E = {
 			isa = PBXGroup;
 			children = (
 				AC8C75BB20D457BA00556E2E /* CognitiveServices */,
 				AC8C75D020D457BA00556E2E /* CognitiveServicesTests */,
-				ACF1BDF720D7EBCE0007699F /* CognitiveServicesTests */,
 				AC8C75BA20D457BA00556E2E /* Products */,
+				D95CB24C28888E1FF462B5DE /* Pods */,
+				6F644C5CB505E1BD915A59B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +129,7 @@
 				AC8C75C520D457BA00556E2E /* LaunchScreen.storyboard */,
 				AC8C75DC20D45D9D00556E2E /* ConstantStrings.plist */,
 				AC8C75C820D457BA00556E2E /* Info.plist */,
+				AC879BFA20E9383F0006E410 /* CognitiveServices-Bridging-Header.h */,
 			);
 			path = CognitiveServices;
 			sourceTree = "<group>";
@@ -124,13 +143,15 @@
 			path = CognitiveServicesTests;
 			sourceTree = "<group>";
 		};
-		ACF1BDF720D7EBCE0007699F /* CognitiveServicesTests */ = {
+		D95CB24C28888E1FF462B5DE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ACF1BDF820D7EBCE0007699F /* CognitiveServicesTests.swift */,
-				ACF1BDFA20D7EBCE0007699F /* Info.plist */,
+				4530FE6530C912EDE8605900 /* Pods-CognitiveServices.debug.xcconfig */,
+				127A15751868348E3E41A693 /* Pods-CognitiveServices.release.xcconfig */,
+				E9483E4A18CEA5CAD426F8C7 /* Pods-CognitiveServicesTests.debug.xcconfig */,
+				24FB049DA822FEF50609DB9D /* Pods-CognitiveServicesTests.release.xcconfig */,
 			);
-			path = CognitiveServicesTests;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC8C75D620D457BA00556E2E /* Build configuration list for PBXNativeTarget "CognitiveServices" */;
 			buildPhases = (
+				91E5C579F7D082DD0948F7D9 /* [CP] Check Pods Manifest.lock */,
 				AC8C75B520D457BA00556E2E /* Sources */,
 				AC8C75B620D457BA00556E2E /* Frameworks */,
 				AC8C75B720D457BA00556E2E /* Resources */,
+				0DE22B2046C967183A15158B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,6 +180,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC8C75D920D457BA00556E2E /* Build configuration list for PBXNativeTarget "CognitiveServicesTests" */;
 			buildPhases = (
+				15EB407267ADAC7E537EB82A /* [CP] Check Pods Manifest.lock */,
 				AC8C75C920D457BA00556E2E /* Sources */,
 				AC8C75CA20D457BA00556E2E /* Frameworks */,
 				AC8C75CB20D457BA00556E2E /* Resources */,
@@ -200,6 +224,7 @@
 				TargetAttributes = {
 					AC8C75B820D457BA00556E2E = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 					AC8C75CC20D457BA00556E2E = {
@@ -262,6 +287,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0DE22B2046C967183A15158B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OnGestureSwift/OnGestureSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/ProjectOxfordFace/ProjectOxfordFace.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnGestureSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProjectOxfordFace.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		15EB407267ADAC7E537EB82A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CognitiveServicesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91E5C579F7D082DD0948F7D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CognitiveServices-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AC8C75B520D457BA00556E2E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -288,7 +372,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF1BDF920D7EBCE0007699F /* CognitiveServicesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +514,10 @@
 		};
 		AC8C75D720D457BA00556E2E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4530FE6530C912EDE8605900 /* Pods-CognitiveServices.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BYQ4J9BT99;
 				INFOPLIST_FILE = CognitiveServices/Info.plist;
@@ -440,6 +525,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.perrchick.CognitiveServices;
 				PRODUCT_NAME = Cognitive;
+				SWIFT_OBJC_BRIDGING_HEADER = "CognitiveServices/CognitiveServices-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -447,8 +534,10 @@
 		};
 		AC8C75D820D457BA00556E2E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 127A15751868348E3E41A693 /* Pods-CognitiveServices.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BYQ4J9BT99;
 				INFOPLIST_FILE = CognitiveServices/Info.plist;
@@ -456,6 +545,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.perrchick.CognitiveServices;
 				PRODUCT_NAME = Cognitive;
+				SWIFT_OBJC_BRIDGING_HEADER = "CognitiveServices/CognitiveServices-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -463,6 +553,7 @@
 		};
 		AC8C75DA20D457BA00556E2E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9483E4A18CEA5CAD426F8C7 /* Pods-CognitiveServicesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -480,6 +571,7 @@
 		};
 		AC8C75DB20D457BA00556E2E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24FB049DA822FEF50609DB9D /* Pods-CognitiveServicesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

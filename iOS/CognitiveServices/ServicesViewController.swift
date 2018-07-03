@@ -10,14 +10,13 @@ import UIKit
 
 class ServicesViewController: CSViewController {
 
-    var apiKey: String = ""
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
     }
     
     func callApi() {
-        let urlString = String(format: "https://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&key=%@", 0.0, 0.0 ,apiKey)
+        let urlString = String(format: "https://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&key=%@", 0.0, 0.0 , apiKey)
         guard let url = URL(string: urlString) else { return }
         let request = URLRequest(url: url)
         
