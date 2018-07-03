@@ -12,8 +12,8 @@ vision_subscription_key = 'KEY_<for-computer-vision-api>'
 face_subscription_key = 'KEY_<for-face-api>'
 
 # Replace with your chosen region (same region in your REST API call as you used to obtain your subscription keys).
-region = 'westeurope'
-base_uri = 'https://' + region + '.api.cognitive.microsoft.com' # Your base URL for using MCS (Microsoft Cognitive Service) APIs
+your_region = 'westeurope'
+base_uri = 'https://' + your_region + '.api.cognitive.microsoft.com' # Your base URL for using MCS (Microsoft Cognitive Service) APIs
 
 def detect(filename):
     # Detection options for Face API
@@ -263,6 +263,7 @@ def analyzeBatch(urls): # For farther guidance: https://code.likeagirl.io/beginn
                 data = future.result()
             except Exception as exc:
                 print(exc) # RateLimitExceeded is expected here.... depends on YOUR pricing (https://azure.microsoft.com/en-us/pricing/)
+                # Example: {'error': {'code': 'RateLimitExceeded', 'message': 'Rate limit is exceeded. Try again later.'}}
                 error_responses_counter = error_responses_counter + 1
             else:
                 success_responses_counter = success_responses_counter + 1
