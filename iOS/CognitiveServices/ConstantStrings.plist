@@ -2,11 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CognitiveServicesKey</key>
-	<string>&lt;empty&gt;</string>
-	<key>VisionSubscriptionKey</key>
-	<string>&lt;empty&gt;</string>
+	<key>FaceSubscriptionKey</key>
+	<string>&lt;your-api-subscription-key&gt;</string>
+	<key>ComputerVisionSubscriptionKey</key>
+	<string>&lt;your-api-subscription-key&gt;</string>
 	<key>BaseUrlKey</key>
-	<string>https://westeurope.api.cognitive.microsoft.com/</string>
+	<string>https://&lt;your-region&gt;.api.cognitive.microsoft.com/</string>
 </dict>
 </plist>

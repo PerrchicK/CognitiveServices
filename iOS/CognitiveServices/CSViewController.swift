@@ -11,7 +11,7 @@ import UIKit
 /// CSViewController stands for: CognitiveServicesViewController
 class CSViewController: UIViewController {
     lazy var apiKey: String = {
-        let key = (UIApplication.shared.delegate as? AppDelegate)?.constantStrings?["CognitiveServicesKey"] as? String
+        let key = (UIApplication.shared.delegate as? AppDelegate)?.constantStrings?["FaceSubscriptionKey"] as? String
         
         return key ?? ""
     }()

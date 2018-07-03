@@ -20,10 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             constantStrings = _constantStrings
         }
 
-        if let key = constantStrings?["CognitiveServicesKey"] as? String, key != "<empty>" {
+        if let key = constantStrings?["FaceSubscriptionKey"] as? String, key != "<empty>" {
             // All good...
         } else {
-            print("CognitiveServicesKey is empty!!! Pleasy fill the 'ConstantStrings.plist' with the right values.")
+            print("FaceSubscriptionKey is empty!!! Pleasy fill the 'ConstantStrings.plist' with the right values.")
         }
 
         return true
