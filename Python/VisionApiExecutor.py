@@ -92,7 +92,7 @@ def analyzeBatch(urls): # For farther guidance: https://code.likeagirl.io/beginn
             try:
                 data = future.result()
             except Exception as exc:
-                print(exc) # RateLimitExceeded is expected here.... depends on YOUR pricing (https://azure.microsoft.com/en-us/pricing/)
+                print(exc) # RateLimitExceeded is expected here (the default limit is 10 calls per second unless you'll open a service request to Microsoft), depends on YOUR pricing (https://azure.microsoft.com/en-us/pricing/)
                 # Example: {'error': {'code': 'RateLimitExceeded', 'message': 'Rate limit is exceeded. Try again later.'}}
                 error_responses_counter = error_responses_counter + 1
             else:

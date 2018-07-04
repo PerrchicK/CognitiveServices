@@ -101,12 +101,10 @@ class ImageOperationsViewController: CSViewController {
     }
 
     @IBAction func onPerformActionClicked(_ sender: UIButton) {
-        guard imgPickedImage.image != nil else { return }
-
         UIAlertController.makeActionSheet(title: "Choose action", message: "pick one")
             .withAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             .withAction(UIAlertAction(title: "Verify", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
-                guard let faceId = self.lastDetectedFaceId else { return }
+                guard let faceId = self.lastDetectedFaceId, self.imgPickedImage.image != nil else { return }
                 self.faceServiceClient.verify(withFaceId: faceId, personId: Constants.PersonId_Nikolai, personGroupId: Constants.PersonsGroupId, completionBlock: { [weak self] (verificationResult, error) in
                     if let error = error { print("Failed! Error: \(error)"); return }
                     guard let verificationResult = verificationResult, let confidence = verificationResult.confidence else { print("Failed to extract result!"); return }
@@ -115,10 +113,32 @@ class ImageOperationsViewController: CSViewController {
                     self?.lblStatus.text = "Done"
                 })
             }))
-            .withAction(UIAlertAction(title: "Add person group", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
-                guard let faceId = self.lastDetectedFaceId else { return }
+            .withAction(UIAlertAction(title: "Smiley people counter holly", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let image = self.imgPickedImage.image, let imageData = UIImageJPEGRepresentation(image, 0.7) else { return }
+                self.faceServiceClient.detect(with: imageData, returnFaceId: false, returnFaceLandmarks: false, returnFaceAttributes: [MPOFaceAttributeTypeEmotion.rawValue]) { [weak self] (faces, error) in
+                    if let error = error {
+                        print("Cognitive detection error: \(error)")
+                    } else if let faces = faces {
+                        var smilesCounter: Int = 0
+                        for face in faces {
+                            if let smileValue = face.attributes?.smile?.doubleValue, smileValue > 0.5 {
+                                smilesCounter += 1
+                            } else if let isHappy = face.attributes?.emotion?.happiness?.boolValue, isHappy {
+                                smilesCounter += 1
+                            }
+                        }
+                        self?.lblStatus.text = "Done"
+                        self?.txtResponseBody.text = "Detection results: smiles counter = \(smilesCounter)"
+                    }
+                }
+            }))
+            .withAction(UIAlertAction(title: "Detect faces", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard self.imgPickedImage.image != nil else { return }
             }))
             .withAction(UIAlertAction(title: "Add person", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let faceId = self.lastDetectedFaceId else { return }
+            }))
+            .withAction(UIAlertAction(title: "Train", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 guard let faceId = self.lastDetectedFaceId else { return }
             }))
             .withAction(UIAlertAction(title: "Train", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
