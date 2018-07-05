@@ -73,9 +73,9 @@ class ImageOperationsViewController: CSViewController {
     func pickImage() {
         guard isCameraAvailable else { return }
 
-        UIAlertController.makeActionSheet(title: "Camera", message: nil)
+        UIAlertController.makeActionSheet(title: "Camera?", message: "This will open your device's camera")
             .withAction(UIAlertAction(title: "Oops...", style: UIAlertActionStyle.cancel, handler: nil))
-            .withAction(UIAlertAction(title: "Capture Face", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+            .withAction(UIAlertAction(title: "Capture Face(s)", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 self.present(self.imagePickerController, animated: true, completion: nil)
             })).show()
     }
@@ -101,19 +101,9 @@ class ImageOperationsViewController: CSViewController {
     }
 
     @IBAction func onPerformActionClicked(_ sender: UIButton) {
-        UIAlertController.makeActionSheet(title: "Choose action", message: "pick one")
+        UIAlertController.makeActionSheet(title: "Choose an action", message: nil)
             .withAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-            .withAction(UIAlertAction(title: "Verify", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
-                guard let faceId = self.lastDetectedFaceId, self.imgPickedImage.image != nil else { return }
-                self.faceServiceClient.verify(withFaceId: faceId, personId: Constants.PersonId_Nikolai, personGroupId: Constants.PersonsGroupId, completionBlock: { [weak self] (verificationResult, error) in
-                    if let error = error { print("Failed! Error: \(error)"); return }
-                    guard let verificationResult = verificationResult, let confidence = verificationResult.confidence else { print("Failed to extract result!"); return }
-                    
-                    self?.txtResponseBody.text = "Verification results: is identical = \(verificationResult.isIdentical), confidence = \(confidence)"
-                    self?.lblStatus.text = "Done"
-                })
-            }))
-            .withAction(UIAlertAction(title: "Smiley people counter holly", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+            .withAction(UIAlertAction(title: "Smiley faces counter", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 guard let image = self.imgPickedImage.image, let imageData = UIImageJPEGRepresentation(image, 0.7) else { return }
                 self.faceServiceClient.detect(with: imageData, returnFaceId: false, returnFaceLandmarks: false, returnFaceAttributes: [MPOFaceAttributeTypeEmotion.rawValue]) { [weak self] (faces, error) in
                     if let error = error {
@@ -132,17 +122,27 @@ class ImageOperationsViewController: CSViewController {
                     }
                 }
             }))
-            .withAction(UIAlertAction(title: "Detect faces", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+            .withAction(UIAlertAction(title: "Create group", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 guard self.imgPickedImage.image != nil else { return }
             }))
             .withAction(UIAlertAction(title: "Add person", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 guard let faceId = self.lastDetectedFaceId else { return }
             }))
-            .withAction(UIAlertAction(title: "Train", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+            .withAction(UIAlertAction(title: "Add face to person", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 guard let faceId = self.lastDetectedFaceId else { return }
             }))
             .withAction(UIAlertAction(title: "Train", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
                 guard let faceId = self.lastDetectedFaceId else { return }
+            }))
+            .withAction(UIAlertAction(title: "Verify", style: UIAlertActionStyle.default, handler: { [unowned self] (alertAction) in
+                guard let faceId = self.lastDetectedFaceId, self.imgPickedImage.image != nil else { return }
+                self.faceServiceClient.verify(withFaceId: faceId, personId: Constants.PersonId_Nikolai, personGroupId: Constants.PersonsGroupId, completionBlock: { [weak self] (verificationResult, error) in
+                    if let error = error { print("Failed! Error: \(error)"); return }
+                    guard let verificationResult = verificationResult, let confidence = verificationResult.confidence else { print("Failed to extract result!"); return }
+                    
+                    self?.txtResponseBody.text = "Verification results: is identical = \(verificationResult.isIdentical), confidence = \(confidence)"
+                    self?.lblStatus.text = "Done"
+                })
             }))
         .show()
     }

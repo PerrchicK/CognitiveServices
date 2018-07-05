@@ -413,7 +413,7 @@ def getRectangle(faceDictionary):
 
 # analyze('AvengersCast.jpg')
 # analyze('liga-justicia.jpg')
-# analyze('beach-coast-coconut-trees-221471.jpg')
+# analyze('https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2017/chemistexpla.jpg')
 
 # detect('The_Avengers_Assembled.jpg')
 
