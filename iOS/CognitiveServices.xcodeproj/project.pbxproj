@@ -12,7 +12,6 @@
 		AC6E150C20D7917000BB3E21 /* ImageOperationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */; };
 		AC6E150E20D792BA00BB3E21 /* CSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150D20D792BA00BB3E21 /* CSViewController.swift */; };
 		AC6E151020D7935000BB3E21 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E150F20D7935000BB3E21 /* Utilities.swift */; };
-		AC6E151220D796D500BB3E21 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E151120D796D500BB3E21 /* ServicesViewController.swift */; };
 		AC8C75BD20D457BA00556E2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C75BC20D457BA00556E2E /* AppDelegate.swift */; };
 		AC8C75BF20D457BA00556E2E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C75BE20D457BA00556E2E /* SplashViewController.swift */; };
 		AC8C75C220D457BA00556E2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8C75C020D457BA00556E2E /* Main.storyboard */; };
@@ -41,7 +40,6 @@
 		AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperationsViewController.swift; sourceTree = "<group>"; };
 		AC6E150D20D792BA00BB3E21 /* CSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSViewController.swift; sourceTree = "<group>"; };
 		AC6E150F20D7935000BB3E21 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		AC6E151120D796D500BB3E21 /* ServicesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		AC879BFA20E9383F0006E410 /* CognitiveServices-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CognitiveServices-Bridging-Header.h"; sourceTree = "<group>"; };
 		AC8C75B920D457BA00556E2E /* Cognitive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cognitive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8C75BC20D457BA00556E2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,12 +116,11 @@
 		AC8C75BB20D457BA00556E2E /* CognitiveServices */ = {
 			isa = PBXGroup;
 			children = (
-				AC6E151120D796D500BB3E21 /* ServicesViewController.swift */,
-				AC6E150F20D7935000BB3E21 /* Utilities.swift */,
-				AC6E150D20D792BA00BB3E21 /* CSViewController.swift */,
 				AC8C75BC20D457BA00556E2E /* AppDelegate.swift */,
+				AC6E150D20D792BA00BB3E21 /* CSViewController.swift */,
 				AC8C75BE20D457BA00556E2E /* SplashViewController.swift */,
 				AC6E150B20D7917000BB3E21 /* ImageOperationsViewController.swift */,
+				AC6E150F20D7935000BB3E21 /* Utilities.swift */,
 				AC8C75C020D457BA00556E2E /* Main.storyboard */,
 				AC8C75C320D457BA00556E2E /* Assets.xcassets */,
 				AC8C75C520D457BA00556E2E /* LaunchScreen.storyboard */,
@@ -294,7 +291,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/OnGestureSwift/OnGestureSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ProjectOxfordFace/ProjectOxfordFace.framework",
 			);
@@ -305,7 +302,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CognitiveServices/Pods-CognitiveServices-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		15EB407267ADAC7E537EB82A /* [CP] Check Pods Manifest.lock */ = {
@@ -351,7 +348,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC6E151220D796D500BB3E21 /* ServicesViewController.swift in Sources */,
 				AC8C75BF20D457BA00556E2E /* SplashViewController.swift in Sources */,
 				AC8C75BD20D457BA00556E2E /* AppDelegate.swift in Sources */,
 				AC6E150C20D7917000BB3E21 /* ImageOperationsViewController.swift in Sources */,
